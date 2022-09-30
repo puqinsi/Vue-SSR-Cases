@@ -1,4 +1,4 @@
-Webpack Cases
+Webpack Case
 
 webpack + @vue/server-renderer
 
