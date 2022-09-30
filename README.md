@@ -4,4 +4,4 @@ Vue SSR Cases
 
 用于学习和理解 Vue SSR 的实现。
 
-- [x] webpack + @vue/server-renderer
+- [x] Webpack Case
