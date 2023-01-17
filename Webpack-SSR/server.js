@@ -9,7 +9,7 @@ const serverManifest = require("./dist/manifest-server.json");
 const serverBundle = path.join(
   __dirname,
   "./dist",
-  serverManifest["server.js"],
+  serverManifest["server.js"]
 );
 // 获取 `entry-server.js` 导出的工厂函数
 const createApp = require(serverBundle).default;
@@ -43,5 +43,6 @@ server.get("/", async (req, res) => {
 server.use(express.static("./dist"));
 
 server.listen(3000, () => {
-  console.log("ready");
+  console.log("Node 服务器已启动~");
+  console.log("http://localhost:3000");
 });
