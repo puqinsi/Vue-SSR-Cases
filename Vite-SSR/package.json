@@ -1,0 +1,29 @@
+{
+  "name": "vite-ssr",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "vite",
+    "dev": "nodemon --watch src/ssr-server --exec 'esno server.ts'",
+    "build": "run-p build:client build:server",
+    "build:client": "vue-tsc && vite build --outDir dist/client --ssrManifest",
+    "build:server": "vue-tsc && vite build --outDir dist/server --ssr src/entry-server.ts",
+    "preview": "NODE_ENV=production esno server.ts"
+  },
+  "dependencies": {
+    "@vue/server-renderer": "^3.2.45",
+    "express": "^4.18.2",
+    "vue": "^3.2.45"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.15",
+    "@vitejs/plugin-vue": "^4.0.0",
+    "esno": "^0.16.3",
+    "nodemon": "^2.0.20",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^4.9.3",
+    "vite": "^4.0.0",
+    "vue-tsc": "^1.0.11"
+  }
+}
