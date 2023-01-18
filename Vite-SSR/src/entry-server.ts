@@ -1,6 +1,6 @@
-import { createSSRApp } from "vue";
-import App from "./App.vue";
+import { createApp } from "./main";
+import { renderToString } from "@vue/server-renderer";
 
-export const render = () => {
-  return createSSRApp(App);
-};
+export async function render() {
+  return await renderToString(createApp());
+}
