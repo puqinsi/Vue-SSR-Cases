@@ -15,7 +15,10 @@ async function createServer() {
   const vite = await useMiddleware(app);
 
   // 服务 index.html
-  app.use("*", async (req, res) => {
+  app.use("*", async (req, res, next) => {
+    // 如果 `middlewareMode` 是 `'ssr'`，应在此为 `index.html` 提供服务.
+    // 如果 `middlewareMode` 是 `'html'`，则此处无需手动服务 `index.html`，因为 Vite 自会接管
+
     try {
       const url = req.originalUrl;
 
@@ -40,6 +43,7 @@ async function createServer() {
       const appHtml = await render();
       // 5. 注入渲染后的应用程序 HTML 到模板中。
       const html = template.replace(`<!-- ssr-app -->`, appHtml);
+
       // 6. 返回渲染后的 HTML。
       res.status(200).set({ "Content-Type": "text/html" }).end(html);
     } catch (e: any) {
@@ -73,7 +77,7 @@ async function useMiddleware(app) {
           interval: 100
         }
       },
-      appType: "custom"
+      appType: "custom" // 不引入 Vite 默认的 HTML 处理中间件
     });
 
     // 使用 vite 的 Connect 实例作为中间件
